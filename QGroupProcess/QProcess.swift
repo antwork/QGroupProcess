@@ -8,7 +8,7 @@
 
 import Foundation
 
-class QProcess: NSObject {
+public class QProcess: NSObject {
     
     deinit {
         print(">>\(name) deinit")
@@ -19,10 +19,10 @@ class QProcess: NSObject {
     var name:String = UUID().uuidString
     
     // 自带参数
-    var originParams:Any?
+    public var originParams:Any?
 
     // 依赖携带参数
-    var dependParams:Any?
+    public var dependParams:Any?
     
     // 开始任务
     @objc public final func start(params:Any?) {
@@ -51,9 +51,9 @@ class QProcess: NSObject {
     }
 }
 
-typealias QOperationBlock = (QProcess) -> Void
+public typealias QOperationBlock = (QProcess) -> Void
 
-class QBlockProcess: QProcess {
+public class QBlockProcess: QProcess {
     
     private let block:QOperationBlock
     
@@ -64,7 +64,7 @@ class QBlockProcess: QProcess {
         self.originParams = params
     }
     
-    override func process() {
+    override public func process() {
         block(self)
     }
 }

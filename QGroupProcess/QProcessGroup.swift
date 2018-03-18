@@ -8,9 +8,9 @@
 
 import Foundation
 
-typealias QOperationFinishBlock = (QProcessGroup, Bool, Any?, Error?) -> Void
+public typealias QOperationFinishBlock = (QProcessGroup, Bool, Any?, Error?) -> Void
 
-class QProcessGroup: NSObject {
+public class QProcessGroup: NSObject {
     
     public var finishBlock:QOperationFinishBlock?
     
