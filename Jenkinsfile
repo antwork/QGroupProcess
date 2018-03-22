@@ -23,7 +23,7 @@ pipeline {
 				sh 'xcodebuild -exportArchive -exportOptionsPlist ../CI/ExportOptions.plist -archivePath build/QOperationGroupsDemo.xcarchive -exportPath ipa_folder'
 				sh 'mv ipa_folder/QOperationGroupsDemo.ipa ../build/QOperationGroupsDemo.ipa'
 				sh 'rm -rf ipa_folder'
-'
+				
 				echo "======= End Build ========"
 			}
 		}
