@@ -20,6 +20,7 @@ pipeline {
 			steps {
 				echo "======= Begin Build ========"
 				sh 'cd QOperationGroupsDemo'
+				sh 'ls'
 				sh 'xcodebuild -project QOperationGroupsDemo.xcodeproj -scheme QOperationGroupsDemo archive -archivePath build/QOperationGroupsDemo.xcarchive -configuration Release'
 
 				sh 'mkdir ipa_folder'
