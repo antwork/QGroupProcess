@@ -8,11 +8,14 @@
 
 import Foundation
 
+enum QProcessStatus:Int {
+    case idle
+    case begin
+    case failure
+    case success
+}
+
 public class QProcess: NSObject {
-    
-    deinit {
-        print(">>\(name) deinit")
-    }
     
     weak var group:QProcessGroup?
     
@@ -24,8 +27,14 @@ public class QProcess: NSObject {
     // 依赖携带参数
     public var dependParams:Any?
     
+    private var status:QProcessStatus = .idle
+    
     // 开始任务
     @objc public final func start(params:Any?) {
+        guard case .idle = self.status else {
+            return
+        }
+        self.status = .begin
         self.dependParams = params
         
         self.process()
@@ -39,6 +48,7 @@ public class QProcess: NSObject {
     // 成功回调
     @objc public final func success(result:Any) {
         DispatchQueue.main.async {
+            self.status = .success
             self.group?.success(operation: self, result: result)
         }
     }
@@ -46,6 +56,7 @@ public class QProcess: NSObject {
     // 失败回调
     @objc public final func failure(error:Error) {
         DispatchQueue.main.async {
+            self.status = .failure
             self.group?.fail(operation: self, error: error)
         }
     }

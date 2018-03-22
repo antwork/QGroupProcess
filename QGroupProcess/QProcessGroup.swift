@@ -58,7 +58,6 @@ public class QProcessGroup: NSObject {
     }
     
     func fail(operation:QProcess, error:Error) {
-        print(">>>finish:failure")
         finishBlock?(self, false, nil, error)
         
         failed = true
@@ -70,7 +69,6 @@ public class QProcessGroup: NSObject {
         }
         
         if finished.count > 0, finished.count == operations.count {
-            print(">>>finish:success")
             finishBlock?(self, true, results, nil)
             return
         }
