@@ -11,11 +11,11 @@ pipeline {
 			steps {
 				echo "begin test"
 				sh """
-				xcodebuild clean 
+				set -o pipefail && xcodebuild clean 
 				 -project QGroupProcess.xcodeproj \
 				 -scheme QGroupProcess \
 				 -destination 'platform=iOS Simulator,name=iPhone 6,OS=11.2' \
-				 test | xcpretty -t; test ${PIPESTATUS[0]} -eq 0
+				 test | xcpretty
 				"""
 				echo "end test"
 			}
