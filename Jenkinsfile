@@ -19,17 +19,15 @@ pipeline {
             }
 			steps {
 				echo "======= Begin Build ========"
-				sh 'cd QOperationGroupsDemo'
-				sh 'ls'
-				sh 'xcodebuild -project QOperationGroupsDemo.xcodeproj -scheme QOperationGroupsDemo archive -archivePath build/QOperationGroupsDemo.xcarchive -configuration Release'
+				sh 'xcodebuild -project QOperationGroupsDemo/QOperationGroupsDemo.xcodeproj -scheme QOperationGroupsDemo archive -archivePath build/QOperationGroupsDemo.xcarchive -configuration Release'
 
 				sh 'mkdir ipa_folder'
 
-				sh 'xcodebuild -exportArchive -exportOptionsPlist ../CI/ExportOptions.plist -archivePath build/QOperationGroupsDemo.xcarchive -exportPath ipa_folder'
-				sh 'mv ipa_folder/QOperationGroupsDemo.ipa ../build/QOperationGroupsDemo.ipa'
+				sh 'xcodebuild -exportArchive -exportOptionsPlist CI/ExportOptions.plist -archivePath build/QOperationGroupsDemo.xcarchive -exportPath ipa_folder'
+				sh 'mv ipa_folder/QOperationGroupsDemo.ipa build/QOperationGroupsDemo.ipa'
 				sh 'rm -rf ipa_folder'
 
-				sh '/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool --upload-app -f ../build/QOperationGroupsDemo.ipa -t ios -u ${username} -p ${password}'
+				sh '/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool --upload-app -f build/QOperationGroupsDemo.ipa -t ios -u ${username} -p ${password}'
 
 				echo "======= End Build ========"
 			}
