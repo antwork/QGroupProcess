@@ -17,9 +17,12 @@ pipeline {
 				echo "======= Begin Build ========"
 				cd QOperationGroupsDemo
 				sh 'xcodebuild -project QOperationGroupsDemo.xcodeproj -scheme QOperationGroupsDemo archive -archivePath build/QOperationGroupsDemo.xcarchive -configuration Release'
-				sh 'xcodebuild -exportArchive -exportOptionsPlist ../CI/ExportOptions.plist -archivePath build/QOperationGroupsDemo.xcarchive -exportPath ../CI/ipa'
-				sh 'mv ../CI/ipa/QOperationGroupsDemo.ipa ../build/QOperationGroupsDemo.ipa'
-				sh 'rm -rf ../CI/ipa'
+
+				sh 'mkdir ipa_folder'
+
+				sh 'xcodebuild -exportArchive -exportOptionsPlist ../CI/ExportOptions.plist -archivePath build/QOperationGroupsDemo.xcarchive -exportPath ipa_folder'
+				sh 'mv ipa_folder/QOperationGroupsDemo.ipa ../build/QOperationGroupsDemo.ipa'
+				sh 'rm -rf ipa_folder'
 '
 				echo "======= End Build ========"
 			}
