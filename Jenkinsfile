@@ -28,7 +28,7 @@ pipeline {
 				sh 'mv ipa_folder/QOperationGroupsDemo.ipa ../build/QOperationGroupsDemo.ipa'
 				sh 'rm -rf ipa_folder'
 
-				sh '/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool --upload-app -f ../build/QOperationGroupsDemo.ipa -t ios -u ${username} -p ${password}
+				sh '/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool --upload-app -f ../build/QOperationGroupsDemo.ipa -t ios -u ${username} -p ${password}'
 
 				echo "======= End Build ========"
 			}
