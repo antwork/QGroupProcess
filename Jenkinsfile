@@ -11,7 +11,7 @@ pipeline {
 			steps {
 				echo "begin test"
 
-				sh 'xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -destination 'platform=iOS Simulator,name=iPhone 6,OS=11.2' test'
+				sh 'xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test'
 				
 				echo "end test"
 			}
