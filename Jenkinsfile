@@ -1,24 +1,9 @@
 pipeline {
 	agent any
 	stages {
-		
-		stage('analyse') {
-			steps {
-				sh 'set -o pipefail && xcodebuild clean | /usr/local/bin/xcpretty -r json-compilation-database'
-				sh '/usr/local/Cellar/oclint/0.11.1/bin/oclint-json-compilation-database -e Pods\
-				-v \
-				-- \
-				-max-priority-1 10000 \
-				-max-priority-2 10000 \
-				-max-priority-3 10000 \
-				-report-type pmd \
-				-o build/report.xml'
-			}
-		}
-
 		stage('Test') {
 			steps {
-				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | tee xcodebuild.log | /usr/local/bin/xcpretty -r json-compilation-database'
+				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | tee build/xcodebuild.log | /usr/local/bin/xcpretty -r junit'
 			}
 		}
 
@@ -50,6 +35,9 @@ pipeline {
 	}
 
 	post {
+		always {
+        	junit '**/reports/junit/*.xml'
+      	}
 		success {
 			echo "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
 		}
