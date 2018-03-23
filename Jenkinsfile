@@ -9,7 +9,7 @@ pipeline {
 
 		stage('Build') {
 			steps {
-				sh 'set -o pipefail && xcodebuild -project QOperationGroupsDemo/QOperationGroupsDemo.xcodeproj -scheme QOperationGroupsDemo archive -archivePath build/QOperationGroupsDemo.xcarchive -configuration Release'
+				sh 'set -o pipefail && xcodebuild -project QOperationGroupsDemo/QOperationGroupsDemo.xcodeproj -scheme QOperationGroupsDemo archive -archivePath build/QOperationGroupsDemo.xcarchive -configuration Release | /usr/local/bin/xcpretty/xcpretty'
 			}
 		}
 
