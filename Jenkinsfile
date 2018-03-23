@@ -3,23 +3,8 @@ pipeline {
 	stages {
 		stage('Test') {
 			steps {
-				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | tee build/xcodebuild.log | /usr/local/bin/xcpretty -r html'
+				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | tee build/xcodebuild.log | /usr/local/bin/xcpretty -r junit'
 			}
-
-			post {
-		        
-		        always {
-		        	// publish html
-			        publishHTML target: [
-			              allowMissing: false,
-			              alwaysLinkToLastBuild: false,
-			              keepAll: true,
-			              reportDir: 'build/reports',
-			              reportFiles: 'test.html',
-			              reportName: 'Tests Report'
-			        ]
-		        }
-		    }
 		}
 
 		stage('Build') {
@@ -51,7 +36,7 @@ pipeline {
 
 	post {
 		always {
-        	junit '**/reports/junit/*.xml'
+			junit 'build/reports/*.xml'
       	}
 		success {
 			echo "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
