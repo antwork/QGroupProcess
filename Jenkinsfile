@@ -20,6 +20,7 @@ pipeline {
                 password = credentials('coremail_developer_password')
             }
 			steps {
+				echo "Deploy"
 				// sh 'rm -rf ipa_folder'
 				// sh 'mkdir ipa_folder'
 
