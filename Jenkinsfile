@@ -2,9 +2,23 @@ pipeline {
 	agent any
 	stages {
 		
+		stage('analyse') {
+			steps {
+				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" | tee xcodebuild.log | /usr/local/bin/xcpretty -r json-compilation-database -o compile_commands.json'
+				sh 'oclint-json-compilation-database -e Pods\
+				-v \
+				-- \
+				-max-priority-1 10000 \
+				-max-priority-2 10000 \
+				-max-priority-3 10000 \
+				-report-type pmd \
+				-o build/report.xml'
+			}
+		}
+
 		stage('Test') {
 			steps {
-				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | /usr/local/bin/xcpretty -r junit'
+				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | tee xcodebuild.log | /usr/local/bin/xcpretty -r json-compilation-database'
 			}
 		}
 

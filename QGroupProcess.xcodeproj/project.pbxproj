@@ -15,6 +15,8 @@
 		D514125B205CB2F20010CDC1 /* QProcessGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5141257205CB2F20010CDC1 /* QProcessGroup.swift */; };
 		D514125E205CB2FD0010CDC1 /* QSubProcessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D514125C205CB2FD0010CDC1 /* QSubProcessTests.swift */; };
 		D514125F205CB2FD0010CDC1 /* QProcessGroupsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D514125D205CB2FD0010CDC1 /* QProcessGroupsTests.swift */; };
+		D596866B2065394000FD4B19 /* ObjectTest.h in Headers */ = {isa = PBXBuildFile; fileRef = D59686692065394000FD4B19 /* ObjectTest.h */; };
+		D596866C2065394000FD4B19 /* ObjectTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D596866A2065394000FD4B19 /* ObjectTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		D5141257205CB2F20010CDC1 /* QProcessGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QProcessGroup.swift; sourceTree = "<group>"; };
 		D514125C205CB2FD0010CDC1 /* QSubProcessTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSubProcessTests.swift; sourceTree = "<group>"; };
 		D514125D205CB2FD0010CDC1 /* QProcessGroupsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QProcessGroupsTests.swift; sourceTree = "<group>"; };
+		D59686692065394000FD4B19 /* ObjectTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectTest.h; sourceTree = "<group>"; };
+		D596866A2065394000FD4B19 /* ObjectTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				D514123F205CB24F0010CDC1 /* QGroupProcess.h */,
 				D5141256205CB2F20010CDC1 /* QProcess.swift */,
 				D5141257205CB2F20010CDC1 /* QProcessGroup.swift */,
+				D59686692065394000FD4B19 /* ObjectTest.h */,
+				D596866A2065394000FD4B19 /* ObjectTest.m */,
 				D5141240205CB24F0010CDC1 /* Info.plist */,
 			);
 			path = QGroupProcess;
@@ -105,6 +111,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D514124D205CB24F0010CDC1 /* QGroupProcess.h in Headers */,
+				D596866B2065394000FD4B19 /* ObjectTest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D596866C2065394000FD4B19 /* ObjectTest.m in Sources */,
 				D5141258205CB2F20010CDC1 /* QProcess.swift in Sources */,
 				D514125A205CB2F20010CDC1 /* QProcessGroup.swift in Sources */,
 			);
