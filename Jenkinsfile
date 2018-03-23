@@ -5,7 +5,7 @@ pipeline {
 		stage('analyse') {
 			steps {
 				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" | tee xcodebuild.log | /usr/local/bin/xcpretty -r json-compilation-database -o compile_commands.json'
-				sh 'oclint-json-compilation-database -e Pods\
+				sh '/usr/local/Cellar/oclint/0.11.1/bin/oclint-json-compilation-database -e Pods\
 				-v \
 				-- \
 				-max-priority-1 10000 \
