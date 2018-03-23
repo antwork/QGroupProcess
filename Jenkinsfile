@@ -3,8 +3,21 @@ pipeline {
 	stages {
 		stage('Test') {
 			steps {
-				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | tee build/xcodebuild.log | /usr/local/bin/xcpretty -r junit'
+				sh 'set -o pipefail && xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | tee build/xcodebuild.log | /usr/local/bin/xcpretty -r html'
 			}
+
+			post {
+		        
+		        // publish html
+		        publishHTML target: [
+		              allowMissing: false,
+		              alwaysLinkToLastBuild: false,
+		              keepAll: true,
+		              reportDir: 'build/reports',
+		              reportFiles: 'html.html',
+		              reportName: 'Tests Report'
+		        ]
+		    }
 		}
 
 		stage('Build') {
