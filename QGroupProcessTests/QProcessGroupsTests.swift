@@ -10,7 +10,7 @@ import XCTest
 
 class QProcessGroupsTests: XCTestCase {
     
-    func fakeFailTest() {
+    func testFakeFail() {
         XCTFail("test faile")
     }
     
