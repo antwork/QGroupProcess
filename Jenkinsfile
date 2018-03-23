@@ -8,15 +8,17 @@ pipeline {
 
 			post {
 		        
-		        // publish html
-		        publishHTML target: [
-		              allowMissing: false,
-		              alwaysLinkToLastBuild: false,
-		              keepAll: true,
-		              reportDir: 'build/reports',
-		              reportFiles: 'html.html',
-		              reportName: 'Tests Report'
-		        ]
+		        always {
+		        	// publish html
+			        publishHTML target: [
+			              allowMissing: false,
+			              alwaysLinkToLastBuild: false,
+			              keepAll: true,
+			              reportDir: 'build/reports',
+			              reportFiles: 'html.html',
+			              reportName: 'Tests Report'
+			        ]
+		        }
 		    }
 		}
 
