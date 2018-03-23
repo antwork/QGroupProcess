@@ -5,6 +5,7 @@ pipeline {
 		stage('Test') {
 			steps {
 				sh 'xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | /usr/local/bin/xcpretty -r junit'
+				sh 'exit 1'
 			}
 		}
 

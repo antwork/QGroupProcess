@@ -10,6 +10,11 @@ import XCTest
 
 class QProcessGroupsTests: XCTestCase {
     
+    func fakeFailTest() {
+        XCTFail("test faile")
+    }
+    
+    
     func testNotRelatedTwoFirstFail() {
         weak var exp = expectation(description: "\(#function)")
         var resultSuccess = false
