@@ -32,14 +32,15 @@ pipeline {
 				// sh '/Applications/Xcode.app/Contents/Applications/Application\\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool --upload-app -f build/QOperationGroupsDemo.ipa -t ios -u ${username} -p ${password}'
 			}
 		}
+	}
 
-		post {
-			success {
-				echo "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-			}
-			failure {
-				echo "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-			}
+	post {
+		success {
+			echo "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
+		}
+
+		failure {
+			echo "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
 		}
 	}
 }
