@@ -1,19 +1,13 @@
 pipeline {
 	agent any
-	stage('analyse') {
-		steps {
-			sh 'set -o pipefail && xcodebuild -project QOperationGroupsDemo/QOperationGroupsDemo.xcodeproj\
-			 -scheme QOperationGroupsDemo -configuration 'Debug' -sdk 'iphonesimulator'\
-			 clean build | tee build/xcodebuild.log | xcpretty --report json-compilation-database --output compile_commands.json'
-			sh 'oclint-json-compilation-database -- -report-type xml -o build/reports/analyse.xml'
+		stage('analyse') {
+			steps {
+				sh 'set -o pipefail && xcodebuild -project QOperationGroupsDemo/QOperationGroupsDemo.xcodeproj\
+				 -scheme QOperationGroupsDemo -configuration 'Debug' -sdk 'iphonesimulator'\
+				 clean build | tee build/xcodebuild.log | xcpretty --report json-compilation-database --output compile_commands.json'
+				sh 'oclint-json-compilation-database -- -report-type xml -o build/reports/analyse.xml'
+			}
 		}
-	}
-
-
-	set -o pipefail && xcodebuild -project 'GoodAir.xcodeproj' -configuration 'Debug' -sdk 'iphonesimulator' \
-    -arch "i386" ONLY_ACTIVE_ARCH=YES VALID_ARCHS="i386 x86_64" \
-    clean build | tee build/xcodebuild.log | xcpretty --report json-compilation-database
-
 
 		stage('Test') {
 			steps {
