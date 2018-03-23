@@ -4,23 +4,22 @@ pipeline {
 		
 		stage('Test') {
 			steps {
-				echo "begin test"
-
 				sh 'xcodebuild clean -project QGroupProcess.xcodeproj -scheme QGroupProcess -configuration "Debug" -destination "platform=iOS Simulator,name=iPhone 6,OS=11.2" test -enableCodeCoverage YES | /usr/local/bin/xcpretty -r junit'
-				
-				echo "end test"
 			}
 		}
 
 		stage('Build') {
+			steps {
+				sh 'xcodebuild -project QOperationGroupsDemo/QOperationGroupsDemo.xcodeproj -scheme QOperationGroupsDemo archive -archivePath build/QOperationGroupsDemo.xcarchive -configuration Release'
+			}
+		}
+
+		stage('Deploy') {
 			environment { 
                 username = credentials('coremail_developer_username')
                 password = credentials('coremail_developer_password')
             }
 			steps {
-				echo "======= Begin Build ========"
-				sh 'xcodebuild -project QOperationGroupsDemo/QOperationGroupsDemo.xcodeproj -scheme QOperationGroupsDemo archive -archivePath build/QOperationGroupsDemo.xcarchive -configuration Release'
-
 				sh 'mkdir ipa_folder'
 
 				sh 'xcodebuild -exportArchive -exportOptionsPlist CI/ExportOptions.plist -archivePath build/QOperationGroupsDemo.xcarchive -exportPath ipa_folder'
@@ -30,14 +29,6 @@ pipeline {
 				sh '/Applications/Xcode.app/Contents/Applications/Application\\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool --validate-app -f build/QOperationGroupsDemo.ipa -t ios -u ${username} -p ${password}'
 
 				sh '/Applications/Xcode.app/Contents/Applications/Application\\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool --upload-app -f build/QOperationGroupsDemo.ipa -t ios -u ${username} -p ${password}'
-
-				echo "======= End Build ========"
-			}
-		}
-
-		stage('Deploy') {
-			steps {
-				echo "Deploy"
 			}
 		}
 	}
