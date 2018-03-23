@@ -5,8 +5,8 @@ pipeline {
 			steps {
 				sh "set -o pipefail && xcodebuild -project QOperationGroupsDemo/QOperationGroupsDemo.xcodeproj\
 				 -scheme QOperationGroupsDemo -configuration 'Debug' -sdk 'iphonesimulator'\
-				 clean build | tee build/xcodebuild.log | xcpretty --report json-compilation-database --output compile_commands.json"
-				sh 'oclint-json-compilation-database -- -report-type xml -o build/reports/analyse.xml'
+				 clean build | tee build/xcodebuild.log | /usr/local/bin/xcpretty --report json-compilation-database --output compile_commands.json"
+				sh '/usr/local/bin/oclint-json-compilation-database -- -report-type xml -o build/reports/analyse.xml'
 			}
 		}
 
