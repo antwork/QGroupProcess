@@ -5,7 +5,9 @@ pipeline {
             expression { BRANCH_NAME == /(master|developer|release)/ }
 		}
 		stage('test') {
-			echo "test master/developer/release"
+			steps {
+				echo "test master/developer/release"
+			}
 		}
 	}
 
