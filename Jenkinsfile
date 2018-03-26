@@ -1,50 +1,42 @@
 pipeline {
 	agent any
 	stages {
-		when {
-            expression { BRANCH_NAME == /(master|developer|release)/ }
-		}
 		stage('test') {
+			when {
+	            expression { BRANCH_NAME == /(master|developer|release)/ }
+			}
 			steps {
 				echo "test master/developer/release"
 			}
 		}
-	}
 
-	stages {
-		when {
-            branch 'master'
-		}
 		stage('master') {
+			when {
+	            branch 'master'
+			}
 			steps {
 				echo "master"
 			}
 		}
-	}
 
-	stages {
-		when {
-            branch 'developer'
-		}
 		stage('developer') {
+			when {
+	            branch 'developer'
+			}
 			steps {
 				echo "developer"
 			}
 		}
-	}
 
-	stages {
-		when {
-            branch 'release'
-		}
 		stage('release') {
+			when {
+	            branch 'release'
+			}
 			steps {
 				echo "release"
 			}
 		}
-	}
 
-	stages {
 		stage('all') {
 			steps {
 				echo "all"
