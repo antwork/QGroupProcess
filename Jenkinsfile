@@ -1,9 +1,14 @@
 pipeline {
 	agent any
+
+	environment {
+		BRANCH_NAME = '${env.BUILD_NUMBER}'
+	}
+
 	stages {
 		stage('test') {
 			when {
-	            expression { env.BRANCH_NAME == /(master|developer|release)/ }
+	            expression { BRANCH_NAME == /(master|developer|release)/ }
 			}
 			steps {
 				echo "test master/developer/release"
