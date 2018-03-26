@@ -3,7 +3,7 @@ pipeline {
 	stages {
 		stage('test') {
 			when {
-	            expression { BRANCH_NAME == /(master|developer|release)/ }
+	            expression { env.BRANCH_NAME == /(master|developer|release)/ }
 			}
 			steps {
 				echo "test master/developer/release"
