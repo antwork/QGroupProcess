@@ -16,9 +16,6 @@ pipeline {
 		}
 
 		stage('master') {
-			when {
-	            branch 'master'
-			}
 			steps {
 				echo "master"
 			}
