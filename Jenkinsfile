@@ -2,13 +2,13 @@ pipeline {
 	agent any
 
 	environment {
-		BRANCH_NAME = '${env.BUILD_NUMBER}'
+		BRANCH_NAME = '${env.GIT_BRANCH}'
 	}
 
 	stages {
 		stage('test') {
 			when {
-	            expression { BRANCH_NAME == /(master|developer|release)/ }
+	            expression { BRANCH_NAME == /(origin\/master|origin\/developer|origin\/release)/ }
 			}
 			steps {
 				echo "test master/developer/release"
@@ -18,21 +18,19 @@ pipeline {
 		stage('master') {
 			steps {
 				echo "master"
-				script {
-					echo "${env.GIT_BRANCH}"
-					echo "${env.BRANCH_NAME}"
-                    if (env.BRANCH_NAME == 'master') {
-			            echo 'I only execute on the master branch'
-			        } else {
-			            echo 'I execute elsewhere'
-			        }
-                }
+
+				when {
+		            branch 'origin/developer'
+				}
+				steps {
+					echo "developer"
+				}
 			}
 		}
 
 		stage('developer') {
 			when {
-	            branch 'developer'
+	            branch 'origin/developer'
 			}
 			steps {
 				echo "developer"
@@ -41,7 +39,7 @@ pipeline {
 
 		stage('release') {
 			when {
-	            branch 'release'
+	            branch 'origin/release'
 			}
 			steps {
 				echo "release"
