@@ -14,7 +14,9 @@ pipeline {
             branch 'master'
 		}
 		stage('master') {
-			echo "master"
+			steps {
+				echo "master"
+			}
 		}
 	}
 
@@ -23,7 +25,9 @@ pipeline {
             branch 'developer'
 		}
 		stage('developer') {
-			echo "developer"
+			steps {
+				echo "developer"
+			}
 		}
 	}
 
@@ -32,13 +36,17 @@ pipeline {
             branch 'release'
 		}
 		stage('release') {
-			echo "release"
+			steps {
+				echo "release"
+			}
 		}
 	}
 
 	stages {
 		stage('all') {
-			echo "all"
+			steps {
+				echo "all"
+			}
 		}
 	}
 }
