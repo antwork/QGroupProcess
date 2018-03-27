@@ -27,5 +27,14 @@ pipeline {
 				echo "all"
 			}
 		}
+
+		stage('master when') {
+			when {
+				branch 'master'
+			}
+			steps {
+				echo "in master with barnch master"
+			}
+		}
 	}
 }
