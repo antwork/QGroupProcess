@@ -12,7 +12,7 @@ pipeline {
 		stage('analyse') {
 			when {
 				expression {
-					GIT_BRANCH = "${env.GIT_LOCATION_BRANCH}"
+					GIT_BRANCH = "${env.GIT_LOCAL_BRANCH}"
 					print GIT_BRANCH
 					return GIT_BRANCH == 'developer'
 				}
