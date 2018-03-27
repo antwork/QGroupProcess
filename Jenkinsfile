@@ -30,7 +30,7 @@ pipeline {
 
 		stage('master when') {
 			when {
-				"${env.GIT_LOCAL_BRANCH}" == 'master'
+				return "${env.GIT_LOCAL_BRANCH}" == 'master'
 			}
 			steps {
 				echo "in master with barnch master"
