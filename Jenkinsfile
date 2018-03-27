@@ -9,33 +9,33 @@ pipeline {
 				echo "${env}"
 			}
 		}
-		stage('master') {
+		stage('analyse') {
 			when {
 				expression {
-                    GIT_BRANCH = 'origin/' + sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-                    println GIT_BRANCH
-                    return GIT_BRANCH == 'origin/master'
-                }
-			}
-			steps {
-				echo "in master"
-			}
-		}
-
-		stage('all') {
-			steps {
-				echo "all"
-			}
-		}
-
-		stage('master when') {
-			when {
-				expression {
-					return "${env.GIT_LOCAL_BRANCH}" == 'master'
+					GIT_BRANCH = "${env.GIT_LOCATION_BRANCH}"
+					return GIT_BRANCH == 'developer'
 				}
 			}
 			steps {
-				echo "in master with barnch master"
+				echo 'analyse only in developer'
+			}
+		}
+
+		stage('unit test') {
+			steps {
+				echo 'all need unit test'
+			}
+		}
+
+		stage('deploy') {
+			when {
+				expression {
+					GIT_BRANCH = "${env.GIT_LOCAL_BRANCH}"
+					return GIT_BRANCH == 'release' || GIT_BRANCH == 'master'
+				}
+			}
+			steps {
+				echo "release/master only"
 			}
 		}
 	}
