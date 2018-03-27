@@ -28,6 +28,12 @@ pipeline {
 			}
 		}
 
+		stage('build') {
+			steps {
+				echo 'all need build'
+			}
+		}
+
 		stage('deploy') {
 			when {
 				expression {
